@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: youtube-shorts-backend
+    env: node
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && NODE_ENV=production node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
