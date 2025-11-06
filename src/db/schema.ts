@@ -1,5 +1,6 @@
 import { mysqlTable, serial, varchar, datetime, int, text, json } from 'drizzle-orm/mysql-core';
 import { sql } from 'drizzle-orm';
+import type { InferSelectModel, InferInsertModel } from 'drizzle-orm';
 
 // Função helper para timestamps
 const timestamps = {
@@ -40,13 +41,11 @@ export const shortsTable = mysqlTable('shorts', {
 });
 
 // Tipos inferidos das tabelas
-type User = typeof usersTable.$inferSelect;
-type NewUser = typeof usersTable.$inferInsert;
+export type User = InferSelectModel<typeof usersTable>;
+export type NewUser = InferInsertModel<typeof usersTable>;
 
-type Video = typeof videosTable.$inferSelect;
-type NewVideo = typeof videosTable.$inferInsert;
+export type Video = InferSelectModel<typeof videosTable>;
+export type NewVideo = InferInsertModel<typeof videosTable>;
 
-type Short = typeof shortsTable.$inferSelect;
-type NewShort = typeof shortsTable.$inferInsert;
-
-export type { User, NewUser, Video, NewVideo, Short, NewShort };
+export type Short = InferSelectModel<typeof shortsTable>;
+export type NewShort = InferInsertModel<typeof shortsTable>;
